@@ -1,43 +1,37 @@
 const express = require("express");
-const cors = require("cors");
-
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+const PORT = process.env.PORT || 3001;
 const app = express();
-
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
-
-app.use(cors(corsOptions));
-
-// parse requests of content-type - application/json
-app.use(express.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
-
-const db = require("./app/models");
-db.mongoose
-  .connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log("Connected to the database!");
-  })
-  .catch(err => {
-    console.log("Cannot connect to the database!", err);
-    process.exit();
-  });
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+const path = require('path');
+const { typeDefs, resolvers } = require('./schema');
+const db = require('./app/config/connection');
+const { authMiddleware } = require('./utils/auth')
+const server = new ApolloServer({ 
+    typeDefs, 
+    resolvers
 });
 
-require("./app/routes/turorial.routes")(app);
+const startApolloServer = async () => {
+    await server.start();
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use('/graphql', expressMiddleware(server, {
+        context: authMiddleware}
+    ))
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+    if(process.env.NODE_ENV === 'production') {
+        app.use(express.static(path.join(__dirname, '../client/dist')))
+        app.get('*', (req, res) => {
+            res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+        })
+    }
+
+    db.once('open', () => {
+        app.listen(PORT, () => {
+            console.log(`GraphQL listening on http://localhost:${PORT}/graphql`);
+        })
+    })
+}
+
+startApolloServer();
