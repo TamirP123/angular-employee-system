@@ -1,47 +1,33 @@
-input {
-    margin-top: 10px;
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .hero {
-    background: linear-gradient(90deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
-    color: white;
+    display: flex;
+    height: 100vh;
+}
+
+.hero-image {
+    flex: 1;
+    background-image: url('https://img.freepik.com/premium-vector/young-man-sits-his-desk-workplace-using-his-personal-desktop-computer-working-online-program-work-home-concept-vector-illustration-isolated-white-background_37895-775.jpg?w=360');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
     text-align: center;
-    padding: 40px 20px;
-}
-
-.login-form {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 350px;
-    margin: 20px auto;
-    padding: 15px;
-}
-
-.login-form h3 {
-    margin-bottom: 15px;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.login-form button {
-    width: 100%;
-    padding: 8px;
-    background-color: rgba(34,193,195,1);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.login-form button:hover {
-    background-color: rgba(253,187,45,1);
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
 }
 
 .logo {
@@ -49,24 +35,69 @@ input {
     margin-bottom: 15px;
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: rgba(34,193,195,1);
-    color: white;
+.tagline {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #e63946;
+}
+
+.login-form {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 25px;
+    transition: transform 0.2s;
+}
+
+.login-form:hover {
+    transform: scale(1.02);
+}
+
+.login-form h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    text-decoration: none;
-    margin-top: 15px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
 }
 
-.cta-button:hover {
-    background-color: rgba(253,187,45,1);
+.login-form input:focus {
+    border-color: #e63946;
+    outline: none;
 }
 
-.info-section {
-    text-align: center;
-    margin: 15px auto;
-    padding: 15px;
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.login-form button:hover {
+    background-color: #f1faee;
+    color: #e63946;
 }
 
 footer {
@@ -78,39 +109,26 @@ footer {
 
 footer a {
     margin: 0 8px;
-    color: rgba(34,193,195,1);
+    color: #e63946;
     text-decoration: none;
 }
 
-.demo-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+footer a:hover {
+    color: #f1faee;
 }
 
-.demo-button {
-    display: inline-block;
-    padding: 8px 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    color: white;
-    flex: 1;
-    margin: 0 5px;
+.agreement-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
     text-align: center;
 }
 
-.admin-button {
-    background-color: rgba(34,193,195,1);
+.agreement-text a {
+    color: #e63946;
+    text-decoration: underline;
 }
 
-.admin-button:hover {
-    background-color: rgba(253,187,45,1);
-}
-
-.employee-button {
-    background-color: rgba(34,193,195,1);
-}
-
-.employee-button:hover {
-    background-color: rgba(253,187,45,1);
+.agreement-text a:hover {
+    color: #f1faee;
 }
